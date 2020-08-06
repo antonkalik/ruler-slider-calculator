@@ -1,0 +1,36 @@
+.calculator {
+  line-height: normal;
+  background: #ffffff;
+  box-shadow: 0 10px 50px rgba(0, 0, 0, .1);
+  border-radius: 8px;
+  text-align: center;
+  padding: 20px;
+  h3.title {
+    padding: 10px 20px;
+    color: $dark;
+  }
+  button {
+    margin: 0 auto;
+    width: 100%;
+  }
+  .slider-desktop,
+  h3.title {
+    padding-bottom: 30px;
+  }
+  p.exit {
+    padding-top: 20px;
+    color: $dim-mid;
+    &:hover {
+      color: $gray;
+      cursor: pointer;
+    }
+  }
+}
+
+@media all and (max-width: $tablet-breakpoint) {
+  .calculator {
+    .desktop-sliders {
+      display: none;
+    }
+  }
+}

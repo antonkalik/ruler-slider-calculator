@@ -1,0 +1,22 @@
+@mixin easeInOut($place, $speed) {
+  -webkit-animation: $place $speed infinite ease-in-out;
+  -moz-animation: $place $speed infinite ease-in-out;
+  animation: $place $speed infinite ease-in-out;
+}
+
+@mixin rotating($speed) {
+  -webkit-animation: rotating $speed linear infinite;
+  -moz-animation: rotating $speed linear infinite;
+  -ms-animation: rotating $speed linear infinite;
+  -o-animation: rotating $speed linear infinite;
+  animation: rotating $speed linear infinite;
+}
+
+@mixin noSelect() {
+  -webkit-touch-callout: none; /* iOS Safari */
+  -webkit-user-select: none; /* Safari */
+  -khtml-user-select: none; /* Konqueror HTML */
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none; /* Internet Explorer/Edge */
+  user-select: none; /* Non-prefixed version, currently */
+}

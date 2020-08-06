@@ -1,0 +1,56 @@
+.slider-desktop {
+  .rc-slider {
+    .rc-slider-handle {
+      background: $green-gradient;
+      border: none;
+      box-shadow: 0 2px 5px rgba(13, 139, 74, .3);
+      border-bottom: 2px solid darken($green, 5);
+      border-radius: 8px;
+      width: 31px;
+      height: 31px;
+      margin-top: -15px;
+    }
+    .rc-slider-track {
+      background-color: $green;
+    }
+    .rc-slider-step {
+      &:hover {
+        cursor: pointer;
+      }
+    }
+    .rc-slider-rail {
+      border: 1px solid darken($light-dim, 3);
+      background-color: $light-dim;
+    }
+  }
+  .head {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: 10px;
+    .title {
+      font-weight: 600;
+      font-size: 12px;
+      color: $gray;
+    }
+    .value {
+      border-bottom: 4px solid $yellow;
+      h3 {
+        line-height: .8;
+        font-weight: 700;
+        font-size: 20px;
+        color: $green;
+        margin-bottom: -2px;
+      }
+    }
+  }
+  .bottom {
+    display: flex;
+    justify-content: space-between;
+    > div {
+      p {
+        color: $dim-mid;
+      }
+    }
+  }
+}
