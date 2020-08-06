@@ -17,17 +17,14 @@ export default function Wheel({ min, max, step, value, onChange, currencySymbol,
     middleRight: currentIndex + 1,
   };
 
-  const scrollTo = useCallback(
-    (left) => {
-      const wheelElement = document.getElementById(name);
-      wheelElement.scrollTo({
-        left,
-        top: 0,
-        behavior: 'smooth',
-      });
-    },
-    [name]
-  );
+  const scrollTo = (left) => {
+    const wheelElement = document.getElementById(name);
+    wheelElement.scrollTo({
+      left,
+      top: 0,
+      behavior: 'smooth',
+    });
+  };
 
   useEffect(() => {
     scrollTo((currentIndex - sideDigits) * itemWidth);

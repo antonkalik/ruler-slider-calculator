@@ -1,5 +1,8 @@
 import React from 'react';
+import smoothScroll from 'smoothscroll-polyfill';
 import { CalculatorDesktop, CalculatorMobile } from '.';
+
+smoothScroll.polyfill();
 
 function Calculator() {
   return (
