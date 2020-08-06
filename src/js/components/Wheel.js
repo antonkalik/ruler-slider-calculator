@@ -1,14 +1,14 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { range } from '../../utilities';
 
-export default function Wheel({ min, max, step, initValue, onChange, currencySymbol, name }) {
+export default function Wheel({ min, max, step, value, onChange, currencySymbol, name }) {
   const wheelRef = useRef(null);
   const sideDigits = 2;
   const sideItems = Array(sideDigits).fill('');
   const items = [...sideItems, ...range(min, max, step), ...sideItems];
   const itemsInScreen = sideDigits * 2 + 1;
   const itemWidth = Math.round(window.innerWidth / itemsInScreen);
-  const [currentIndex, setCurrentIndex] = useState(items.indexOf(initValue));
+  const [currentIndex, setCurrentIndex] = useState(items.indexOf(value));
   const lines = [...new Array(5).keys()];
   const sideItemsIndex = {
     left: currentIndex - sideDigits,
@@ -17,18 +17,21 @@ export default function Wheel({ min, max, step, initValue, onChange, currencySym
     middleRight: currentIndex + 1,
   };
 
-  const scrollTo = (left) => {
-    const wheelElement = document.getElementById(name);
-    wheelElement.scrollTo({
-      left,
-      top: 0,
-      behavior: 'smooth',
-    });
-  };
+  const scrollTo = useCallback(
+    (left) => {
+      const wheelElement = document.getElementById(name);
+      wheelElement.scrollTo({
+        left,
+        top: 0,
+        behavior: 'smooth',
+      });
+    },
+    [name]
+  );
 
   useEffect(() => {
     scrollTo((currentIndex - sideDigits) * itemWidth);
-  }, [itemWidth]);
+  }, [itemWidth, currentIndex, sideDigits]);
 
   useEffect(() => {
     let timer = null;

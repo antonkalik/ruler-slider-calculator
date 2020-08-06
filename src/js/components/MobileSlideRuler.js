@@ -1,13 +1,22 @@
 import React from 'react';
 import Wheel from './Wheel';
 
-function MobileSlideRuler({ title, min, max, step, initValue, currencySymbol, onChange, name }) {
+export default function MobileSlideRuler({
+  title,
+  min,
+  max,
+  step,
+  value,
+  currencySymbol,
+  onChange,
+  name,
+}) {
   return (
     <div className="mobile-slide-ruler">
       <p className="title">{title}</p>
       <Wheel
         name={name}
-        initValue={initValue}
+        value={value}
         min={min}
         max={max}
         step={step}
@@ -17,5 +26,3 @@ function MobileSlideRuler({ title, min, max, step, initValue, currencySymbol, on
     </div>
   );
 }
-
-export default React.memo(MobileSlideRuler);

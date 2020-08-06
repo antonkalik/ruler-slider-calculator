@@ -1,17 +1,29 @@
 import React from 'react';
 import Loading from './Loading';
 
-export default function Button({ onClick, text, type = 'primary', icon, loading = {}, name }) {
+export default function Button({
+  onClick,
+  text,
+  type,
+  className = 'primary',
+  icon,
+  loading,
+  name,
+}) {
   const onClickHandler = (e) => {
     e.preventDefault();
     onClick(name);
   };
 
-  const isLoading = loading[name];
-
   return (
-    <button disabled={isLoading} className={type} onClick={onClickHandler} name={name}>
-      {isLoading ? (
+    <button
+      disabled={loading}
+      type={type}
+      className={className}
+      onClick={onClickHandler}
+      name={name}
+    >
+      {loading ? (
         <Loading />
       ) : (
         <>

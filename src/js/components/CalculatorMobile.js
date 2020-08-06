@@ -7,7 +7,7 @@ export default function CalculatorMobile({ buttonText = 'Aceptar', onAccept }) {
     <div className="calculator-mobile">
       <MobileSlideRuler
         name="amount"
-        initValue={2000}
+        value={2000}
         min={500}
         max={5000}
         step={100}
@@ -17,7 +17,7 @@ export default function CalculatorMobile({ buttonText = 'Aceptar', onAccept }) {
       />
       <MobileSlideRuler
         name="term"
-        initValue={20}
+        value={20}
         min={1}
         max={30}
         step={1}

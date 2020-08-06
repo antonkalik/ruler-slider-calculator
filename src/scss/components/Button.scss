@@ -1,0 +1,110 @@
+button {
+  cursor: pointer;
+  border-radius: 8px;
+  padding: 0 30px;
+  text-align: center;
+  img.icon-button {
+    padding-left: 10px;
+  }
+  p {
+    font-size: 16px;
+    font-weight: 500;
+  }
+}
+
+button.secondary {
+  border: 1px solid $light-dim;
+  height: 38px;
+  background: none;
+  display: flex;
+  white-space: nowrap;
+  align-items: center;
+  justify-content: center;
+  .loading {
+    > span {
+      background-color: $dim;
+    }
+  }
+  p {
+    font-size: 14px;
+  }
+  &:hover {
+    border: 1px solid $dark;
+    box-shadow: inset 0 0 0 1px $dark;
+  }
+  &:disabled,
+  &[disabled] {
+    border: 1px solid $light;
+    p {
+      color: $dim-mid;
+    }
+  }
+}
+
+button.primary {
+  height: 58px;
+  box-shadow: 0 2px 6px rgba(0, 20, 5, .05);
+  border: 1px solid darken($green, 2);
+  background: $green-gradient;
+  color: white;
+  display: flex;
+  white-space: nowrap;
+  align-items: center;
+  justify-content: center;
+  &:active {
+    border: none;
+    background: darken($green, 2);
+    box-shadow: inset 0 2px 2px rgba(0, 0, 0, 0.2);
+    transform: translateY(1px);
+  }
+  &:disabled,
+  &[disabled] {
+    box-shadow: none;
+    border: none;
+    background: lighten($green, 30);
+    cursor: default;
+  }
+  &:hover:enabled:not(:active) {
+    background: linear-gradient(0deg, #11cf6c 0.5%, #1ae97e 100%);
+  }
+}
+
+button.white {
+  height: 58px;
+  box-shadow: 0 5px 9px rgba(0, 30, 10, .4);
+  border: none;
+  border-bottom: 2px solid darken(#10c567, 10);
+  background: white;
+  display: flex;
+  white-space: nowrap;
+  align-items: center;
+  justify-content: center;
+  color: $green;
+  &:active {
+    border: none;
+    box-shadow: inset 0 2px 2px rgba(0, 0, 0, .2);
+    transform: translateY(1px);
+  }
+  &:disabled,
+  &[disabled] {
+    border: none;
+    box-shadow: none;
+    background: rgba(255, 255, 255, 0.3);
+    transform: translateY(1px);
+    cursor: default;
+  }
+}
+
+@media all and (max-width: $tablet-breakpoint) {
+  button {
+    display: block;
+    p {
+      font-size: 16px;
+      font-weight: 500;
+    }
+    img.icon-button {
+      max-width: 25px;
+      height: auto;
+    }
+  }
+}

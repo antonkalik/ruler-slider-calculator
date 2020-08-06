@@ -1,10 +1,14 @@
 .calculator {
+  .calculator-desktop {
+    display: block;
+    padding: 20px;
+  }
+  .calculator-mobile {
+    display: none;
+  }
   line-height: normal;
   background: #ffffff;
-  box-shadow: 0 10px 50px rgba(0, 0, 0, .1);
-  border-radius: 8px;
   text-align: center;
-  padding: 20px;
   h3.title {
     padding: 10px 20px;
     color: $dark;
@@ -13,7 +17,7 @@
     margin: 0 auto;
     width: 100%;
   }
-  .slider-desktop,
+  .calculator-desktop,
   h3.title {
     padding-bottom: 30px;
   }
@@ -29,8 +33,26 @@
 
 @media all and (max-width: $tablet-breakpoint) {
   .calculator {
-    .desktop-sliders {
+    .calculator-desktop {
       display: none;
+    }
+    .calculator-mobile {
+      display: block;
+      background: $green;
+      background: linear-gradient(
+                      90deg,
+                      rgb(44, 119, 78) 0%,
+                      rgba(12, 153, 80, 1) 15%,
+                      rgb(0, 232, 127) 50%,
+                      rgba(12, 153, 80, 1) 85%,
+                      rgb(44, 119, 78) 100%
+      );
+      .footer-mobile-calculator {
+        padding: 20px;
+        > button {
+          width: 100%;
+        }
+      }
     }
   }
 }
