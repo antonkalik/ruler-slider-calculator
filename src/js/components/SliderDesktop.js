@@ -17,9 +17,7 @@ export default function SliderDesktop({
   return (
     <div className="slider-desktop">
       <div className="head">
-        <div className="title">
-          <p className="text-small">{title}</p>
-        </div>
+        <h5 className="title">{title}</h5>
         <div onClick={amountOnClick} className="value">
           <h3>
             {value} {extension}

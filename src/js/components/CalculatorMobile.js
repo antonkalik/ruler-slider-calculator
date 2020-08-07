@@ -1,8 +1,7 @@
 import React from 'react';
 import MobileSlideRuler from './MobileSlideRuler';
-import Button from './Button';
 
-export default function CalculatorMobile({ buttonText = 'Aceptar', onAccept }) {
+export default function CalculatorMobile({ onChange }) {
   return (
     <div className="calculator-mobile">
       <MobileSlideRuler
@@ -13,7 +12,7 @@ export default function CalculatorMobile({ buttonText = 'Aceptar', onAccept }) {
         step={100}
         currencySymbol="€"
         title="Cantidad hasta ___ €"
-        onChange={(data) => console.log(data)}
+        onChange={onChange}
       />
       <MobileSlideRuler
         name="term"
@@ -23,11 +22,8 @@ export default function CalculatorMobile({ buttonText = 'Aceptar', onAccept }) {
         step={1}
         currencySymbol="Días"
         title="Plazo hasta ___ días"
-        onChange={(data) => console.log(data)}
+        onChange={onChange}
       />
-      <div className="footer-mobile-calculator">
-        <Button text={buttonText} onClick={onAccept} />
-      </div>
     </div>
   );
 }

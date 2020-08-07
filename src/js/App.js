@@ -2,10 +2,14 @@ import React from 'react';
 import { Calculator } from './components';
 
 function App() {
-  const data = 'somedata';
   return (
     <div className="app">
-      <Calculator data={data} />
+      <Calculator
+        buttonText="Accept"
+        onAccept={(data) => {
+          console.log('onAccept data:', data);
+        }}
+      />
     </div>
   );
 }
