@@ -1,6 +1,7 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { range } from '../../utilities';
 
+let timer = null;
 export default function Wheel({ min, max, step, value, onChange, currencySymbol, name }) {
   const wheelRef = useRef(null);
   const sideDigits = 2;
@@ -17,39 +18,36 @@ export default function Wheel({ min, max, step, value, onChange, currencySymbol,
     middleRight: currentIndex + 1,
   };
 
-  const scrollTo = (left) => {
-    const wheelElement = document.getElementById(name);
-    wheelElement.scrollTo({
-      left,
-      top: 0,
-      behavior: 'smooth',
-    });
-  };
+  const scrollTo = useCallback(
+    (left) => {
+      const wheelElement = document.getElementById(name);
+      wheelElement.scrollTo({
+        left,
+        top: 0,
+        behavior: 'smooth',
+      });
+    },
+    [name]
+  );
+
+  const scrollCallback = useCallback(() => {
+    let centerIndex = Math.round(wheelRef.current.scrollLeft / itemWidth);
+
+    if (timer !== null) {
+      clearTimeout(timer);
+    }
+    setCurrentIndex(centerIndex + sideDigits);
+    timer = setTimeout(() => {
+      onChange({ value: items[centerIndex + sideDigits], name });
+    }, 200);
+  }, [name]);
 
   useEffect(() => {
     scrollTo((currentIndex - sideDigits) * itemWidth);
-  }, [itemWidth, currentIndex, sideDigits]);
-
-  useEffect(() => {
-    let timer = null;
     const wheelElement = document.getElementById(name);
-
-    wheelElement.addEventListener(
-      'scroll',
-      () => {
-        let centerIndex = Math.round(wheelRef.current.scrollLeft / itemWidth);
-        setCurrentIndex(centerIndex + sideDigits);
-        if (timer !== null) {
-          clearTimeout(timer);
-        }
-        timer = setTimeout(() => {
-          const data = { value: items[centerIndex + sideDigits], name };
-          onChange(data);
-        }, 200);
-      },
-      false
-    );
-  }, [wheelRef]);
+    wheelElement.addEventListener('scroll', scrollCallback);
+    return () => wheelElement.removeEventListener('scroll', scrollCallback);
+  }, []);
 
   const onClickItem = (index) => {
     scrollTo((index - sideDigits) * itemWidth);

@@ -17,7 +17,7 @@ export default function CalculatorMobile({ buttonText = 'Aceptar', onAccept }) {
       />
       <MobileSlideRuler
         name="term"
-        value={20}
+        value={7}
         min={1}
         max={30}
         step={1}
