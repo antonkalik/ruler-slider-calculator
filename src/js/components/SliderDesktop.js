@@ -1,24 +1,25 @@
-import React from 'react';
+import React, { useState } from 'react';
 import RCSlider from 'rc-slider';
 import 'rc-slider/assets/index.css';
 
+let timer = null;
 export default function SliderDesktop({
   step = 1,
   min = 0,
   max = 100,
   onChange,
-  value,
+  value: initValue,
   title,
   extension = '€',
   name,
 }) {
-  const amountOnClick = (e) => console.log(e);
+  const [value, setValue] = useState(initValue);
 
   return (
     <div className="slider-desktop">
       <div className="head">
         <h5 className="title">{title}</h5>
-        <div onClick={amountOnClick} className="value">
+        <div className="value">
           <h3>
             {value} {extension}
           </h3>
@@ -27,8 +28,11 @@ export default function SliderDesktop({
       <RCSlider
         min={min}
         step={step}
-        onChange={(newValue) => {
+        onAfterChange={(newValue) => {
           onChange({ value: newValue, name });
+        }}
+        onChange={(newValue) => {
+          setValue(newValue);
         }}
         defaultValue={value}
         max={max}

@@ -5,19 +5,38 @@ import Loading from './Loading';
 
 smoothScroll.polyfill();
 
-function Calculator({ buttonText, buttonIcon, loading, onAccept }) {
-  const [data, setData] = useState({});
+function Calculator({ buttonText, buttonIcon, loading, onAccept, onChange, sliders }) {
+  const initialValues = Object.keys(sliders).reduce((a, c) => {
+    a[c] = sliders[c].initValue;
+    return a;
+  }, {});
+
+  const [dataState, setDataState] = useState(initialValues);
+
+  const props = {
+    sliders,
+    onChange: (data) => {
+      if (data) {
+        setDataState({
+          ...dataState,
+          [data.name]: data.value,
+        });
+        onChange(data);
+      }
+    },
+  };
+
   return (
     <div className="calculator">
-      <CalculatorDesktop onChange={(data) => console.log('onChange', data)} />
-      <CalculatorMobile onChange={(data) => console.log('onChange', data)} />
+      <CalculatorDesktop {...props} />
+      <CalculatorMobile {...props} />
       <div className="calculator-footer">
         <button
           disabled={loading}
           className="calculator-btn"
           onClick={(e) => {
             e.preventDefault();
-            onAccept(data);
+            onAccept(dataState);
           }}
         >
           {loading ? (

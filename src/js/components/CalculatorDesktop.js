@@ -1,29 +1,24 @@
 import React from 'react';
 import SliderDesktop from './SliderDesktop';
 
-const CalculatorDesktop = ({ onChange }) => {
+const CalculatorDesktop = ({ onChange, sliders }) => {
   return (
     <div className="calculator-desktop">
-      <SliderDesktop
-        title="Amount"
-        name="amount"
-        extension="€"
-        min={500}
-        max={5000}
-        step={100}
-        value={2000}
-        onChange={onChange}
-      />
-      <SliderDesktop
-        title="Term on"
-        name="term"
-        extension="days"
-        value={20}
-        min={1}
-        max={30}
-        step={1}
-        onChange={onChange}
-      />
+      {Object.keys(sliders).map((name) => {
+        const slider = sliders[name];
+        return (
+          <SliderDesktop
+            title="Amount"
+            name={name}
+            extension={slider.extension}
+            min={slider.min}
+            max={slider.max}
+            step={slider.step}
+            value={slider.initValue}
+            onChange={onChange}
+          />
+        );
+      })}
     </div>
   );
 };
