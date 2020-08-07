@@ -3,10 +3,18 @@ import smoothScroll from 'smoothscroll-polyfill';
 import Loading from './Loading';
 import SliderDesktop from './SliderDesktop';
 import MobileSlideRuler from './MobileSlideRuler';
+import PropTypes from 'prop-types';
 
 smoothScroll.polyfill();
 
-function Calculator({ buttonText, buttonIcon, loading, onAccept, onChange, sliders }) {
+export default function Calculator({
+  buttonText,
+  buttonIcon,
+  loading,
+  onAccept,
+  onChange,
+  sliders,
+}) {
   const initialValues = Object.keys(sliders).reduce((a, c) => {
     a[c] = sliders[c].initValue;
     return a;
@@ -62,4 +70,11 @@ function Calculator({ buttonText, buttonIcon, loading, onAccept, onChange, slide
   );
 }
 
-export default Calculator;
+Calculator.propTypes = {
+  buttonText: PropTypes.string,
+  buttonIcon: PropTypes.string, // url to icon
+  loading: PropTypes.bool,
+  onAccept: PropTypes.func, // full application data { [name]: number }
+  onChange: PropTypes.func, // slider data { name: string, value: number }
+  sliders: PropTypes.object.isRequired, // slider shape
+};
