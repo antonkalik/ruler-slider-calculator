@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import smoothScroll from 'smoothscroll-polyfill';
-import { CalculatorDesktop, CalculatorMobile } from '.';
 import Loading from './Loading';
+import SliderDesktop from './SliderDesktop';
+import MobileSlideRuler from './MobileSlideRuler';
 
 smoothScroll.polyfill();
 
@@ -12,24 +13,32 @@ function Calculator({ buttonText, buttonIcon, loading, onAccept, onChange, slide
   }, {});
 
   const [dataState, setDataState] = useState(initialValues);
+  const onChangeHandler = useCallback((data) => {
+    if (data) {
+      setDataState({
+        ...dataState,
+        [data.name]: data.value,
+      });
+      onChange(data);
+    }
+  }, []);
 
-  const props = {
-    sliders,
-    onChange: (data) => {
-      if (data) {
-        setDataState({
-          ...dataState,
-          [data.name]: data.value,
-        });
-        onChange(data);
-      }
-    },
+  const components = {
+    desktop: SliderDesktop,
+    mobile: MobileSlideRuler,
   };
 
   return (
     <div className="calculator">
-      <CalculatorDesktop {...props} />
-      <CalculatorMobile {...props} />
+      {Object.keys(components).map((key) => {
+        const Slider = components[key];
+        return Object.keys(sliders).map((name) => (
+          <div key={name} className={`calculator-${key}`}>
+            <Slider key={key} name={name} onChange={onChangeHandler} {...sliders[name]} />
+          </div>
+        ));
+      })}
+
       <div className="calculator-footer">
         <button
           disabled={loading}

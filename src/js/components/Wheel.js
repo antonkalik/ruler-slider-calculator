@@ -2,14 +2,14 @@ import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { range } from '../../utilities';
 
 let timer = null;
-export default function Wheel({ min, max, step, value, onChange, currencySymbol, name }) {
+export default function Wheel({ min, max, step, initValue, onChange, extension, name }) {
   const wheelRef = useRef(null);
   const sideDigits = 2;
   const sideItems = Array(sideDigits).fill('');
   const items = [...sideItems, ...range(min, max, step), ...sideItems];
   const itemsInScreen = sideDigits * 2 + 1;
   const itemWidth = Math.round(window.innerWidth / itemsInScreen);
-  const [currentIndex, setCurrentIndex] = useState(items.indexOf(value));
+  const [currentIndex, setCurrentIndex] = useState(items.indexOf(initValue));
   const lines = [...new Array(5).keys()];
   const sideItemsIndex = {
     left: currentIndex - sideDigits,
@@ -80,7 +80,7 @@ export default function Wheel({ min, max, step, value, onChange, currencySymbol,
               {item > 0 ? (
                 <p>
                   {item}
-                  <span className="currency-symbol">{currencySymbol}</span>
+                  <span className="extension-symbol">{extension}</span>
                 </p>
               ) : (
                 item
