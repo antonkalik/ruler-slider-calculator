@@ -31,14 +31,14 @@ export default function Wheel({ min, max, step, value, onChange, currencySymbol,
   );
 
   const scrollCallback = useCallback(() => {
-    let centerIndex = Math.round(wheelRef.current.scrollLeft / itemWidth);
+    let leftIndex = Math.round(wheelRef.current.scrollLeft / itemWidth);
 
     if (timer !== null) {
       clearTimeout(timer);
     }
-    setCurrentIndex(centerIndex + sideDigits);
+    setCurrentIndex(leftIndex + sideDigits);
     timer = setTimeout(() => {
-      onChange({ value: items[centerIndex + sideDigits], name });
+      onChange({ value: items[leftIndex + sideDigits], name });
     }, 200);
   }, [name]);
 
